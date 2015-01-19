@@ -213,13 +213,13 @@ var MetaViewGenerator = {
 			return;
 		}
 
-		res += '<div class="list-group" id="projectsListGroup" >';
+		res += '<div class="meta_full_width meta_list_view">';
 		for (var i = 0; i < data.length; i++) {
-			res += '<div class="list-group-item"';
+			res += '<button type="button" class="btn btn-default bordered-normal-btn meta_list_select meta_full_width" ';
 			for (var j = 0; j < meta[metaAttr].length; j++) {
 				res += 'data-' + meta[metaAttr][j] + '="' + ((data[i][meta[metaAttr][j]] !== "") ? data[i][meta[metaAttr][j]] : "---" ) + '"';
 			}
-			res += 'style="cursor:pointer;" onmouseover=$(this).addClass("list-group-item-info") onmouseout=$(this).removeClass("list-group-item-info")>';
+			res += '>';
 			var first = true;
 			for (var j = 0; j < meta[metaAttr].length; j++) {
 				if (showElements) {
@@ -232,7 +232,7 @@ var MetaViewGenerator = {
 					first = false;
 				}
 			}
-			res += '</div>';
+			res += '</button>';
 		}
 		res += '</div>';
 
