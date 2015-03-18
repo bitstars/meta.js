@@ -246,7 +246,7 @@ var MetaViewGenerator = {
 	 * @param data
 	 * @param onComplete
 	 */
-	generateObjectEditView: function (meta, data, onComplete) {
+	generateObjectEditView: function (meta, data, onComplete, classes) {
 		var res = '';
 		res += '<input type="hidden" name="classname" value="' + meta['CLASS_NAME'] + '">';
 		if (!this.isJSONArray(meta.FIELDS_ALL)) {
@@ -311,13 +311,13 @@ var MetaViewGenerator = {
 				if (typeof data !== 'undefined') {
 					for (var k = 0; k < data[meta.FIELDS_ALL[i]].length; k++) {
 						tempRes += '<div class="meta_simple_collection_element"><div class="meta-button-legend"  align="right"><button type="button" class="btn btn-danger btn-xs" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">X</button></div>';
-						tempRes += this.generateSimpleTypeElementEdit(data[meta.FIELDS_ALL[i]][k], meta, meta.FIELDS_ALL[i], false, "meta_simple_collection");
+						tempRes += this.generateSimpleTypeElementEdit(data[meta.FIELDS_ALL[i]][k], meta, meta.FIELDS_ALL[i], false, "meta_simple_collection"+(classes?" "+classes:""));
 						tempRes += '</div>';
 					}
 				}
 
 				metaTemplatesStr[tempId] = '<div class="meta_simple_collection_element"><div class="meta-button-legend"  align="right"><button type="button" class="btn btn-danger btn-xs" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">X</button></div>';
-				metaTemplatesStr[tempId] += this.generateSimpleTypeElementEdit(undefined, meta, meta.FIELDS_ALL[i], false, "meta_simple_collection");
+				metaTemplatesStr[tempId] += this.generateSimpleTypeElementEdit(undefined, meta, meta.FIELDS_ALL[i], false, "meta_simple_collection"+(classes?" "+classes:""));
 				metaTemplatesStr[tempId] += '</div>';
 
 				tempRes += '</div><div align="right"><button type="button" class="btn btn-success btn-sm" onclick="generateMetaTemplate(\'' + tempId + '\', false);">Add</button></div>';
@@ -355,9 +355,9 @@ var MetaViewGenerator = {
 			}
 			else {
 				if (typeof  data !== "undefined") {
-					res += this.generateSimpleTypeElementEdit(data[meta.FIELDS_ALL[i]], meta, meta.FIELDS_ALL[i], true);
+					res += this.generateSimpleTypeElementEdit(data[meta.FIELDS_ALL[i]], meta, meta.FIELDS_ALL[i], true, classes);
 				} else {
-					res += this.generateSimpleTypeElementEdit(undefined, meta, meta.FIELDS_ALL[i], true);
+					res += this.generateSimpleTypeElementEdit(undefined, meta, meta.FIELDS_ALL[i], true, classes);
 				}
 			}
 		}
