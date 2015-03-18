@@ -448,13 +448,13 @@ var MetaViewGenerator = {
 			}
 			var tempId = makeid();
 			res += '<div class="meta-container" >' +
-			'<div class="row"><div class="col-md-3"><div class="meta-container" style="display:block;height:110px;" ><img id="' + tempId + '_image" class="meta-image ';
+			'<div class="row"><div class="col-md-3"><div class="meta-container" style="display:block;height:110px;" ><div style="width:100px;height:98px;overflow: hidden;"><img id="' + tempId + '_image" class="meta-image ';
 			if (typeof data !== 'undefined') {
 				res += '" src="' + data + '">';
 			} else {
 				res += 'meta-no-image">';
 			}
-			res += '</div></div><div class="col-md-9" align="right">' +
+			res += '</div></div></div><div class="col-md-9" align="right">' +
 			'<table class="meta_full_width"><tr><td>Url: </td><td class="' + (BOTTSTRAP_MATERIAL ? " form-control-wrapper" : "") + '"><input id="' + tempId + '_url" type="text" class="form-control ' + addClass + '" name="' + fieldName + '" value="';
 
 			if (typeof data !== 'undefined') {
