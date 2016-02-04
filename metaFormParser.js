@@ -79,5 +79,63 @@ var MetaFormParser = {
     });
 
     return result;
-  }
+  },
+
+	parseForm: function (domElement, resultTemp) {
+
+		var result = resultTemp;
+		if (typeof resultTemp === "undefined") {
+			result = new Object();
+		}
+
+		$(domElement).children().each(function () {
+			if ($(this).attr("name")) {
+				var name = $(this).attr("name");
+				if (result[name] !== undefined) {
+					if (!result[name].push) {
+						result[name] = [result[name]];
+					}
+					if (this.value) {
+						if (this.value.toLowerCase().trim() === "true") {
+							result[name].push(true);
+						} else if (this.value.toLowerCase().trim() === "false") {
+							result[name].push(false);
+						} else if ($.isNumeric(this.value)) {
+							result[name].push(parseFloat(this.value));
+						} else {
+							result[name].push(JSON.parse(this.value));
+						}
+					} else {
+						result[name].push(null);
+					}
+
+				} else {
+					if (this.value) {
+						if (this.value.toLowerCase().trim() === "true") {
+							result[name] = true;
+						} else if (this.value.toLowerCase().trim() === "false") {
+							result[name] = false;
+						} else if ($.isNumeric(this.value)) {
+							result[name] = parseFloat(this.value);
+						} else {
+							//try to parse json
+							try{
+								result[name] = JSON.parse(this.value);
+							}catch(e){
+								result[name] = this.value;
+							}
+
+						}
+					} else {
+						result[name] = null;
+					}
+
+				}
+			}
+			result = MetaFormParser.parseForm($(this), result);
+		});
+		return result;
+	}
 }
+
+module.exports = MetaFormParser;
