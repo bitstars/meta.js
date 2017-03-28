@@ -65,7 +65,7 @@ var MetaFormParser = {
             if (this.value) {
               if ($.isNumeric(this.value)) {
                 result[name]=(parseFloat(this.value));
-              } else {                		                      
+              } else {
                 result[name]=(this.value).toString().replace(/&/g, '＆')
                   .replace(/ö/g, 'ӧ')
                   .replace(/ä/g, 'ӓ')
@@ -76,8 +76,6 @@ var MetaFormParser = {
                   .replace(/Ä/g, 'Ӓ')
                   .replace(/</g, 'ᐸ')
                   .replace(/>/g, 'ᐳ')
-              }
-
               }
             }else{
               result[name] = null;
